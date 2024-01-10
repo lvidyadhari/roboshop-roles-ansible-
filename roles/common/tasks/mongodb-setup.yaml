@@ -9,16 +9,16 @@
     state: present
 
 - name: get the entries count
-  ansible.builtin.command: mongo --host mongodb.daws76s.store --quiet --eval 'db = db.getSiblingDB("catalogue"); db.entries.count()'
-  register: entries_count
+  ansible.builtin.command: mongo --host mongodb.daws76s.store --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
+  register: products_count
   when: component == "catalogue"
-
+  #ignore_errors: true
 
 - name: get the entries count
-  ansible.builtin.command: mongo --host mongodb.daws76s.store --quiet --eval 'db = db.getSiblingDB("user"); db.entries.count()'
-  register: entries_count
+  ansible.builtin.command: mongo --host mongodb.daws76s.store --quiet --eval 'db = db.getSiblingDB("user"); db.users.count()'
+  register: users_count
   when: component == "user"
 
 - name: load {{component}} data
   ansible.builtin.command: "mongo --host mongodb.daws76s.store < /app/schema/{{component}}.js"
-  when: entries_count.stdout == "0" # keep double quotes
+  when: component == "catalogue" and products_count.stdout == "0"
