@@ -15,7 +15,7 @@
 
 
 - name: get the entries count
-  ansible.builtin.command:  mongo --host mongodb.daws76s.store --quiet --eval 'db = db.getSiblingDB("catalogue"); db.user.count()'
+  ansible.builtin.command:  mongo --host mongodb.daws76s.store --quiet --eval 'db = db.getSiblingDB("user"); db.user.count()'
   register: entries_count
   when: component == "user"
 
