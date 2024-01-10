@@ -22,3 +22,7 @@
 - name: load {{component}} data
   ansible.builtin.command: "mongo --host mongodb.daws76s.store < /app/schema/{{component}}.js"
   when: component == "catalogue" and products_count.stdout == "0"
+
+- name: load {{component}} data
+  ansible.builtin.command: "mongo --host mongodb.daws76s.store < /app/schema/{{component}}.js"
+  when: component == "user" and products_count.stdout == "0"
