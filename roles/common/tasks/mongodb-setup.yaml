@@ -20,5 +20,5 @@
   when: component == "user"
 
 - name: load {{component}} data
-  ansible.builtin.command: "mongo --host mongodb.daws76s.online < /app/schema/{{component}}.js"
+  ansible.builtin.command: "mongo --host mongodb.daws76s.store < /app/schema/{{component}}.js"
   when: entries_count.stdout == "0" # keep double quotes
