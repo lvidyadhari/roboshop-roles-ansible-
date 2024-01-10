@@ -15,14 +15,14 @@
   #ignore_errors: true
 
 - name: get the entries count
-  ansible.builtin.command: mongo --host mongodb.daws76s.store --quiet --eval 'db = db.getSiblingDB("user"); db.users.count()'
+  ansible.builtin.command: mongo --host mongodb.daws76s.store --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
   register: users_count
   when: component == "user"
 
-- name: load catalogue data
-  ansible.builtin.shell: "mongo --host mongodb.daws76s.store < /app/schema/catalogue.js"
+- name: "load catalogue data"
+  ansible.builtin.shell: "mongo --host mongodb.daws76s.store < /app/schema/{{component}}.js"
   when: component == "catalogue" and products_count.stdout == "0"
 
-- name: load {{component}} data
+- name: "load user data"
   ansible.builtin.shell: "mongo --host mongodb.daws76s.store < /app/schema/{{component}}.js"
   when: component == "users" and users_count.stdout == "0"
