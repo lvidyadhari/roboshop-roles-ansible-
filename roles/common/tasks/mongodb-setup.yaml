@@ -8,7 +8,7 @@
     name: mongodb-org-shell
     state: present
 
-- name: get the entries count
+- name: get the product count
   ansible.builtin.command: mongo --host mongodb.daws76s.store --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
   register: products_count
   when: component == "catalogue"
@@ -19,8 +19,8 @@
   register: users_count
   when: component == "user"
 
-- name: load {{component}} data
-  ansible.builtin.command: "mongo --host mongodb.daws76s.store < /app/schema/{{component}}.js"
+- name: load catalogue data
+  ansible.builtin.command: "mongo --host mongodb.daws76s.store < /app/schema/catalogue.js"
   when: component == "catalogue" and products_count.stdout == "0"
 
 - name: load {{component}} data
