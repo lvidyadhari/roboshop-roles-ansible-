@@ -8,13 +8,13 @@
     name: mongodb-org-shell
     state: present
 
-- name: "get the {{component}} entries count"
+- name: "get the product entries count"
   ansible.builtin.shell: mongo --host mongodb.daws76s.store --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
   register: products_count
   when: component == "catalogue"
-
-- name: "get the {{component}} entries count"
-  ansible.builtin.shell: mongo --host user.daws76s.store --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
+  
+- name: "get the entries count"
+  ansible.builtin.shell: mongo --host mongodb.daws76s.store --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
   register: users_count
   when: component == "user"
 
