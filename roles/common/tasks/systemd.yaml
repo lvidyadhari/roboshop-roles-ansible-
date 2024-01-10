@@ -3,7 +3,7 @@
    src: catalogue.service
    dest: /etc/systemd/system/catalogue.service
 
-- name: deamon realod and start
+- name: deamon reload and start
   ansible.builtin.systemd_service:
    daemon_reload: true   
 
